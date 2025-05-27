@@ -1,47 +1,56 @@
 <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    <div class="w-full sm:max-w-md mx-auto mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+        <!-- Erros de validação -->
+        <x-input-error :messages="$errors->all()" class="mb-4" />
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+        <!-- Formulário de login -->
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <!-- Email -->
+            <div>
+                <x-input-label for="email" :value="'Email'" />
+                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email"
+                              :value="old('email')" required autofocus />
+            </div>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+            <!-- Senha -->
+            <div class="mt-4">
+                <x-input-label for="password" :value="'Senha'" />
+                <x-text-input id="password" class="block mt-1 w-full" type="password" name="password"
+                              required autocomplete="current-password" />
+            </div>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+            <!-- Lembrar -->
+            <div class="block mt-4">
+                <label for="remember_me" class="inline-flex items-center">
+                    <input id="remember_me" type="checkbox"
+                           class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
+                           name="remember">
+                    <span class="ml-2 text-sm text-gray-600">Lembre-se de mim</span>
+                </label>
+            </div>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+            <!-- Botões e links -->
+            <div class="flex flex-col gap-3 mt-6">
+                <!-- Botão de login -->
+                <x-primary-button class="w-full justify-center">
+                    INICIAR SESSÃO
+                </x-primary-button>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
+                <!-- Link para registro como aluno -->
+                <a class="text-center text-sm text-blue-600 hover:underline"
+                   href="{{ route('register') }}">
+                    Cadastrar-se como Aluno
                 </a>
-            @endif
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
+                <!-- Acesso rápido como ADM -->
+                <a class="text-center text-sm text-gray-500 hover:underline cursor-pointer"
+                   onclick="document.getElementById('email').value='admin@admin.com'; document.getElementById('password').value='admin123';">
+                    Entrar como Administrador (pré-preencher dados)
+                </a>
+            </div>
+        </form>
+    </div>
 </x-guest-layout>
