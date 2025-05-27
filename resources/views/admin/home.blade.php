@@ -1,39 +1,95 @@
 @extends('layouts.app')
 
-@section('title', 'SIGAC - Painel do Administrador')
+@section('title', 'Painel do Administrador')
 
 @section('content')
-    <div class="row g-4 justify-content-center">
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-white bg-primary">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-user-graduate fa-2x me-3"></i>
+                        <div>
+                            <h5 class="mb-0">Alunos</h5>
+                            <small>{{ \App\Models\Aluno::count() }} matriculados</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-white bg-success">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-users fa-2x me-3"></i>
+                        <div>
+                            <h5 class="mb-0">Turmas</h5>
+                            <small>{{ \App\Models\Turma::count() }} registradas</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-white bg-warning">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-file-invoice fa-2x me-3"></i>
+                        <div>
+                            <h5 class="mb-0">Comprovantes</h5>
+                            <small>{{ \App\Models\Comprovante::count() }} enviados</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-white bg-info">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-chart-bar fa-2x me-3"></i>
+                        <div>
+                            <h5 class="mb-0">Declarações</h5>
+                            <small>{{ \App\Models\Declaracao::count() }} emitidas</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mb-3">Gestão</h4>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
         @php
             $cards = [
-                ['label' => 'Alunos', 'count' => \App\Models\Aluno::count(), 'route' => 'alunos.index', 'icon' => 'fa-user-graduate', 'desc' => 'Gerencie os alunos matriculados.'],
-                ['label' => 'Turmas', 'count' => \App\Models\Turma::count(), 'route' => 'turmas.index', 'icon' => 'fa-users', 'desc' => 'Organize e visualize as turmas.'],
-                ['label' => 'Cursos', 'count' => \App\Models\Curso::count(), 'route' => 'cursos.index', 'icon' => 'fa-book-open', 'desc' => 'Cadastre os cursos disponíveis.'],
-                ['label' => 'Níveis', 'count' => \App\Models\Nivel::count(), 'route' => 'niveis.index', 'icon' => 'fa-layer-group', 'desc' => 'Classifique os cursos por nível.'],
-                ['label' => 'Categorias', 'count' => \App\Models\Categoria::count(), 'route' => 'categorias.index', 'icon' => 'fa-tags', 'desc' => 'Categorias de documentos ou cursos.'],
-                ['label' => 'Comprovantes', 'count' => \App\Models\Comprovante::count(), 'route' => 'comprovantes.index', 'icon' => 'fa-file-invoice', 'desc' => 'Arquivos de comprovação.'],
-                ['label' => 'Declarações', 'count' => \App\Models\Declaracao::count(), 'route' => 'declaracoes.index', 'icon' => 'fa-file-signature', 'desc' => 'Documentos emitidos para os alunos.'],
-                ['label' => 'Documentos', 'count' => \App\Models\Documento::count(), 'route' => 'documentos.index', 'icon' => 'fa-folder-open', 'desc' => 'Gerencie os documentos anexos.'],
+                ['label' => 'Alunos', 'route' => 'alunos.index', 'icon' => 'fa-user-graduate', 'desc' => 'Gerencie os alunos matriculados.'],
+                ['label' => 'Turmas', 'route' => 'turmas.index', 'icon' => 'fa-users', 'desc' => 'Visualize e organize as turmas.'],
+                ['label' => 'Cursos', 'route' => 'cursos.index', 'icon' => 'fa-book-open', 'desc' => 'Cadastre cursos e conteúdos.'],
+                ['label' => 'Níveis', 'route' => 'niveis.index', 'icon' => 'fa-layer-group', 'desc' => 'Classifique os cursos.'],
+                ['label' => 'Categorias', 'route' => 'categorias.index', 'icon' => 'fa-tags', 'desc' => 'Documentos ou cursos.'],
+                ['label' => 'Comprovantes', 'route' => 'comprovantes.index', 'icon' => 'fa-file-alt', 'desc' => 'Arquivos comprobatórios.'],
+                ['label' => 'Declarações', 'route' => 'declaracoes.index', 'icon' => 'fa-file-signature', 'desc' => 'Documentos para alunos.'],
+                ['label' => 'Documentos', 'route' => 'documentos.index', 'icon' => 'fa-folder-open', 'desc' => 'Gerencie os anexos.'],
             ];
         @endphp
 
         @foreach ($cards as $card)
-            <div class="col-md-6 col-xl-4">
-                <div class="card bg-light text-dark h-100 shadow rounded p-3 border border-primary">
-                    <div class="card-body d-flex flex-column">
-                        <div class="mb-3">
-                            <h5 class="card-title fw-bold text-primary">
-                                <i class="fas {{ $card['icon'] }} me-2"></i> {{ $card['label'] }}
-                            </h5>
-                            <h3 class="card-text">{{ $card['count'] }}</h3>
-                            <p class="small">{{ $card['desc'] }}</p>
+            <div class="col">
+                <div class="card h-100 border border-primary shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas {{ $card['icon'] }} fa-lg text-primary me-2"></i>
+                            <h5 class="card-title mb-0 text-primary">{{ $card['label'] }}</h5>
                         </div>
-                        <a href="{{ route($card['route']) }}" class="btn btn-outline-primary mt-auto">
-                            Gerenciar {{ strtolower($card['label']) }}
-                        </a>
+                        <p class="card-text text-muted small">{{ $card['desc'] }}</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 text-end">
+                        <a href="{{ route($card['route']) }}" class="btn btn-outline-primary btn-sm">Gerenciar {{ strtolower($card['label']) }}</a>
                     </div>
                 </div>
             </div>
         @endforeach
     </div>
+</div>
 @endsection
