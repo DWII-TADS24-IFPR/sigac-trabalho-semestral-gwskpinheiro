@@ -15,6 +15,12 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    @if(Auth::user()->is_admin)
+                        <x-nav-link :href="route('admin.graficos')" :active="request()->routeIs('admin.graficos')">
+                            <i class="fas fa-chart-bar me-1"></i> Gráficos de Horas
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -70,6 +76,12 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            @if(Auth::user()->is_admin)
+                <x-responsive-nav-link :href="route('admin.graficos')" :active="request()->routeIs('admin.graficos')">
+                    <i class="fas fa-chart-bar me-1"></i> Gráficos de Horas
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

@@ -15,6 +15,7 @@ use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Aluno\HomeController as AlunoHomeController;
+use App\Http\Controllers\Admin\GraficoController; // <- Adicionado aqui
 
 // Redireciona a raiz para o login
 Route::get('/', fn () => redirect('/login'));
@@ -48,7 +49,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('aluno.home');
 });
 
-// CRUDs acessíveis apenas para administradores
+// CRUDs e funções exclusivas para administrador
 Route::middleware(['auth'])->group(function () {
     Route::group(['middleware' => function ($request, $next) {
         if (!auth()->user()->is_admin) {
@@ -56,6 +57,7 @@ Route::middleware(['auth'])->group(function () {
         }
         return $next($request);
     }], function () {
+        // CRUDs
         Route::resources([
             'alunos' => AlunoController::class,
             'categorias' => CategoriaController::class,
@@ -67,18 +69,21 @@ Route::middleware(['auth'])->group(function () {
             'documentos' => DocumentoController::class,
         ]);
 
-        // Aprovação/Reprovação de Comprovantes
+        // Aprovar / Reprovar Comprovantes
         Route::patch('/comprovantes/{id}/aprovar', [ComprovanteController::class, 'aprovar'])->name('comprovantes.aprovar');
         Route::patch('/comprovantes/{id}/reprovar', [ComprovanteController::class, 'reprovar'])->name('comprovantes.reprovar');
+
+        // Gráficos
+        Route::get('/admin/graficos', [GraficoController::class, 'index'])->name('admin.graficos');
     });
 });
 
-// Perfil do usuário
+// Perfil do usuário (pode editar ou excluir)
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Autenticação (Breeze)
+// Autenticação padrão (Laravel Breeze)
 require __DIR__.'/auth.php';
