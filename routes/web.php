@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+
 use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\CursoController;
@@ -11,13 +12,14 @@ use App\Http\Controllers\ComprovanteController;
 use App\Http\Controllers\DeclaracaoController;
 use App\Http\Controllers\DocumentoController;
 use App\Http\Controllers\ProfileController;
+
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Aluno\HomeController as AlunoHomeController;
 
-Route::get('/', function () {
-    return redirect('/login');
-});
+// Redireciona a raiz para o login
+Route::get('/', fn () => redirect('/login'));
 
+// Redirecionamento pós login com base no perfil
 Route::get('/dashboard', function () {
     if (Auth::check() && Auth::user()->is_admin) {
         return redirect()->route('admin.home');
@@ -27,8 +29,9 @@ Route::get('/dashboard', function () {
     return redirect('/login');
 })->middleware(['auth'])->name('dashboard');
 
-// ROTA HOME ADMIN
+// Rotas para ambos autenticados, mas separando a home
 Route::middleware(['auth'])->group(function () {
+    // Home do Admin
     Route::get('/admin/home', function () {
         if (!auth()->user()->is_admin) {
             return redirect('/');
@@ -36,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
         return app(AdminHomeController::class)->index();
     })->name('admin.home');
 
+    // Home do Aluno
     Route::get('/aluno/home', function () {
         if (auth()->user()->is_admin) {
             return redirect('/');
@@ -44,7 +48,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('aluno.home');
 });
 
-// ROTAS CRUD APENAS PARA ADM
+// CRUDs acessíveis apenas para administradores
 Route::middleware(['auth'])->group(function () {
     Route::group(['middleware' => function ($request, $next) {
         if (!auth()->user()->is_admin) {
@@ -62,14 +66,19 @@ Route::middleware(['auth'])->group(function () {
             'declaracoes' => DeclaracaoController::class,
             'documentos' => DocumentoController::class,
         ]);
+
+        // Aprovação/Reprovação de Comprovantes
+        Route::patch('/comprovantes/{id}/aprovar', [ComprovanteController::class, 'aprovar'])->name('comprovantes.aprovar');
+        Route::patch('/comprovantes/{id}/reprovar', [ComprovanteController::class, 'reprovar'])->name('comprovantes.reprovar');
     });
 });
 
-// PERFIL
+// Perfil do usuário
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Autenticação (Breeze)
 require __DIR__.'/auth.php';
