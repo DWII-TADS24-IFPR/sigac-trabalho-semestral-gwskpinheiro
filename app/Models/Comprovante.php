@@ -10,7 +10,7 @@ class Comprovante extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['aluno_id', 'descricao', 'arquivo'];
+    protected $fillable = ['aluno_id', 'descricao', 'arquivo', 'categoria_id', 'status',];
 
     protected $dates = ['deleted_at'];
 

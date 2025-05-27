@@ -3,18 +3,16 @@
 @section('title', 'Editar Comprovante')
 
 @section('content')
-    <h1>Editar Comprovante</h1>
+<div class="container">
+    <h1 class="mb-4">Editar Comprovante</h1>
 
     <form action="{{ route('comprovantes.update', $comprovante) }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
+        @csrf @method('PUT')
 
         <div class="mb-3">
             <label for="descricao" class="form-label">Descrição</label>
             <input type="text" name="descricao" id="descricao" class="form-control" value="{{ old('descricao', $comprovante->descricao) }}">
-            @error('descricao')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
+            @error('descricao') <div class="text-danger">{{ $message }}</div> @enderror
         </div>
 
         <div class="mb-3">
@@ -27,22 +25,22 @@
                     </option>
                 @endforeach
             </select>
-            @error('aluno_id')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
+            @error('aluno_id') <div class="text-danger">{{ $message }}</div> @enderror
         </div>
 
         <div class="mb-3">
             <label for="arquivo" class="form-label">Arquivo</label>
             <input type="file" name="arquivo" id="arquivo" class="form-control">
             @if ($comprovante->arquivo)
-                <small class="d-block mt-1">Arquivo atual: <a href="{{ Storage::url($comprovante->arquivo) }}" target="_blank">Visualizar</a></small>
+                <small class="d-block mt-2">
+                    Arquivo atual: <a href="{{ Storage::url($comprovante->arquivo) }}" target="_blank">Visualizar</a>
+                </small>
             @endif
-            @error('arquivo')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
+            @error('arquivo') <div class="text-danger">{{ $message }}</div> @enderror
         </div>
 
         <button type="submit" class="btn btn-primary">Atualizar</button>
+        <a href="{{ route('comprovantes.index') }}" class="btn btn-secondary ms-2">Cancelar</a>
     </form>
+</div>
 @endsection
