@@ -4,54 +4,65 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-&nbsp;
-&nbsp;
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-&nbsp;
-&nbsp;
+    <title>@yield('title', config('app.name', 'SIGAC'))</title>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-&nbsp;
-&nbsp;
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Scripts -->
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Vite Assets -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+        }
+        header {
+            background: linear-gradient(90deg, #0d6efd 0%, #0b5ed7 100%);
+            color: #fff;
+        }
+        footer {
+            background-color: #fff;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
 </head>
-<body class="font-sans antialiased bg-gray-100">
-    <div class="min-h-screen flex flex-col">
+<body>
+    <div class="d-flex flex-column min-vh-100">
+
+        <!-- Navigation -->
         @include('layouts.navigation')
-&nbsp;
-&nbsp;
 
-        <!-- Page Heading -->
+        <!-- Header -->
         @isset($header)
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <h1 class="text-2xl font-bold text-gray-800">{{ $header }}</h1>
-                </div>
-            </header>
+        <header class="py-4 shadow-sm">
+            <div class="container">
+                <h1 class="h3 fw-bold m-0">{{ $header }}</h1>
+            </div>
+        </header>
         @endisset
-&nbsp;
-&nbsp;
 
-        <!-- Page Content -->
-        <main class="flex-grow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <!-- Main Content -->
+        <main class="flex-grow-1 py-4">
+            <div class="container">
                 @yield('content')
             </div>
         </main>
-&nbsp;
-&nbsp;
 
         <!-- Footer -->
-        <footer class="bg-white shadow mt-6">
-            <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center">
-                <p class="text-gray-600">© {{ date('Y') }} {{ config('app.name') }}. Todos os direitos reservados.</p>
-            </div>
+        <footer class="py-3 text-center text-muted small mt-auto">
+            © {{ date('Y') }} {{ config('app.name', 'SIGAC') }}. Todos os direitos reservados.
         </footer>
     </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
