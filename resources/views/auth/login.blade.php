@@ -44,12 +44,6 @@
                    href="{{ route('register') }}">
                     Cadastrar-se como Aluno
                 </a>
-
-                <!-- Acesso rápido como ADM -->
-                <a class="text-center text-sm text-gray-500 hover:underline cursor-pointer"
-                   onclick="document.getElementById('email').value='admin@admin.com'; document.getElementById('password').value='admin123';">
-                    Entrar como Administrador (pré-preencher dados)
-                </a>
             </div>
         </form>
     </div>
