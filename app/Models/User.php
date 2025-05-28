@@ -10,6 +10,11 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public function aluno()
+    {
+        return $this->hasOne(\App\Models\Aluno::class, 'email', 'email');
+    }
+
     protected $fillable = [
         'name',
         'email',

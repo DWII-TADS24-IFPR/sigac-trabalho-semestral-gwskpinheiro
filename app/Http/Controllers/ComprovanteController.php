@@ -79,11 +79,15 @@ class ComprovanteController extends Controller
         return redirect()->route('comprovantes.index')->with('success', 'Comprovante excluído com sucesso.');
     }
 
-        public function aprovar($id)
+    public function aprovar($id)
     {
         $comprovante = Comprovante::findOrFail($id);
         $comprovante->status = 'aprovado';
         $comprovante->save();
+
+        $aluno = $comprovante->aluno;
+        $aluno->horas_cumpridas += $comprovante->carga_horaria;
+        $aluno->save();
 
         return redirect()->back()->with('success', 'Comprovante aprovado com sucesso!');
     }
@@ -96,5 +100,4 @@ class ComprovanteController extends Controller
 
         return redirect()->back()->with('success', 'Comprovante reprovado com sucesso!');
     }
-
 }
