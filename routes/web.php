@@ -18,6 +18,9 @@ use App\Http\Controllers\Aluno\HomeController as AlunoHomeController;
 use App\Http\Controllers\Aluno\ComprovanteAlunoController;
 use App\Http\Controllers\Admin\GraficoController;
 
+use App\Http\Middleware\IsAdmin;
+use App\Http\Middleware\IsAluno;
+
 // Redireciona a raiz para o login
 Route::get('/', fn () => redirect('/login'));
 
@@ -31,71 +34,43 @@ Route::get('/dashboard', function () {
     return redirect('/login');
 })->middleware(['auth'])->name('dashboard');
 
-// Rotas autenticadas (admin e aluno)
+// Rotas do ALUNO
+Route::middleware(['auth', IsAluno::class])->prefix('aluno')->name('aluno.')->group(function () {
+    Route::get('/home', [AlunoHomeController::class, 'index'])->name('home');
+    Route::get('comprovantes', [ComprovanteAlunoController::class, 'index'])->name('comprovantes.index');
+    Route::get('comprovantes/create', [ComprovanteAlunoController::class, 'create'])->name('comprovantes.create');
+    Route::post('comprovantes', [ComprovanteAlunoController::class, 'store'])->name('comprovantes.store');
+
+    // Futuro: declarações
+    // Route::get('declaracao', [DeclaracaoAlunoController::class, 'show'])->name('declaracao');
+});
+
+// Rotas do ADMIN
+Route::middleware(['auth', IsAdmin::class])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/home', [AdminHomeController::class, 'index'])->name('home');
+
+    // CRUDs
+    Route::resources([
+        'alunos' => AlunoController::class,
+        'categorias' => CategoriaController::class,
+        'cursos' => CursoController::class,
+        'niveis' => NivelController::class,
+        'turmas' => TurmaController::class,
+        'comprovantes' => ComprovanteController::class,
+        'declaracoes' => DeclaracaoController::class,
+        'documentos' => DocumentoController::class,
+    ]);
+
+    // Aprovar / Reprovar Comprovantes
+    Route::patch('/comprovantes/{id}/aprovar', [ComprovanteController::class, 'aprovar'])->name('comprovantes.aprovar');
+    Route::patch('/comprovantes/{id}/reprovar', [ComprovanteController::class, 'reprovar'])->name('comprovantes.reprovar');
+
+    // Gráficos
+    Route::get('/graficos', [GraficoController::class, 'index'])->name('graficos');
+});
+
+// Perfil do usuário (todos)
 Route::middleware(['auth'])->group(function () {
-
-    // Home do Admin
-    Route::get('/admin/home', function () {
-        if (!auth()->user()->is_admin) {
-            return redirect('/');
-        }
-        return app(AdminHomeController::class)->index();
-    })->name('admin.home');
-
-    // Home do Aluno
-    Route::get('/aluno/home', function () {
-        if (auth()->user()->is_admin) {
-            return redirect('/');
-        }
-        return app(AlunoHomeController::class)->index();
-    })->name('aluno.home');
-
-    // Rotas do ALUNO (sem middleware is_aluno)
-    Route::prefix('aluno')->name('aluno.')->group(function () {
-        Route::group(['middleware' => function ($request, $next) {
-            if (auth()->user()->is_admin) {
-                return redirect('/');
-            }
-            return $next($request);
-        }], function () {
-            // Comprovantes (solicitação de horas)
-            Route::get('comprovantes', [ComprovanteAlunoController::class, 'index'])->name('comprovantes.index');
-            Route::get('comprovantes/create', [ComprovanteAlunoController::class, 'create'])->name('comprovantes.create');
-            Route::post('comprovantes', [ComprovanteAlunoController::class, 'store'])->name('comprovantes.store');
-
-            // Futuro: declarações
-            // Route::get('declaracao', [DeclaracaoAlunoController::class, 'show'])->name('declaracao');
-        });
-    });
-
-    // Rotas do ADMIN (sem middleware is_admin)
-    Route::group(['middleware' => function ($request, $next) {
-        if (!auth()->user()->is_admin) {
-            return redirect('/');
-        }
-        return $next($request);
-    }], function () {
-        // CRUDs
-        Route::resources([
-            'alunos' => AlunoController::class,
-            'categorias' => CategoriaController::class,
-            'cursos' => CursoController::class,
-            'niveis' => NivelController::class,
-            'turmas' => TurmaController::class,
-            'comprovantes' => ComprovanteController::class,
-            'declaracoes' => DeclaracaoController::class,
-            'documentos' => DocumentoController::class,
-        ]);
-
-        // Aprovar / Reprovar Comprovantes
-        Route::patch('/comprovantes/{id}/aprovar', [ComprovanteController::class, 'aprovar'])->name('comprovantes.aprovar');
-        Route::patch('/comprovantes/{id}/reprovar', [ComprovanteController::class, 'reprovar'])->name('comprovantes.reprovar');
-
-        // Gráficos
-        Route::get('/admin/graficos', [GraficoController::class, 'index'])->name('admin.graficos');
-    });
-
-    // Perfil do usuário (todos)
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

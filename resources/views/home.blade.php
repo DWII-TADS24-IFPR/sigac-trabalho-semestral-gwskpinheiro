@@ -7,14 +7,14 @@
     <div class="row g-4 justify-content-center">
         @php
             $cards = [
-                ['label' => 'Alunos', 'count' => $alunos, 'route' => 'alunos.index', 'icon' => 'fa-user-graduate', 'desc' => 'Gerencie os alunos matriculados.'],
-                ['label' => 'Turmas', 'count' => $turmas, 'route' => 'turmas.index', 'icon' => 'fa-users', 'desc' => 'Organize e visualize as turmas.'],
-                ['label' => 'Cursos', 'count' => $cursos, 'route' => 'cursos.index', 'icon' => 'fa-book-open', 'desc' => 'Cadastre os cursos disponíveis.'],
-                ['label' => 'Níveis', 'count' => $niveis, 'route' => 'niveis.index', 'icon' => 'fa-layer-group', 'desc' => 'Classifique os cursos por nível.'],
-                ['label' => 'Categorias', 'count' => $categorias, 'route' => 'categorias.index', 'icon' => 'fa-tags', 'desc' => 'Categorias de documentos ou cursos.'],
-                ['label' => 'Comprovantes', 'count' => $comprovantes, 'route' => 'comprovantes.index', 'icon' => 'fa-file-invoice', 'desc' => 'Arquivos de comprovação.'],
-                ['label' => 'Declarações', 'count' => $declaracoes, 'route' => 'declaracoes.index', 'icon' => 'fa-file-signature', 'desc' => 'Documentos emitidos para os alunos.'],
-                ['label' => 'Documentos', 'count' => $documentos, 'route' => 'documentos.index', 'icon' => 'fa-folder-open', 'desc' => 'Gerencie os documentos anexos.'],
+                ['label' => 'Alunos', 'count' => $alunos, 'route' => 'admin.alunos.index', 'icon' => 'fa-user-graduate', 'desc' => 'Gerencie os alunos matriculados.'],
+                ['label' => 'Turmas', 'count' => $turmas, 'route' => 'admin.turmas.index', 'icon' => 'fa-users', 'desc' => 'Organize e visualize as turmas.'],
+                ['label' => 'Cursos', 'count' => $cursos, 'route' => 'admin.cursos.index', 'icon' => 'fa-book-open', 'desc' => 'Cadastre os cursos disponíveis.'],
+                ['label' => 'Níveis', 'count' => $niveis, 'route' => 'admin.niveis.index', 'icon' => 'fa-layer-group', 'desc' => 'Classifique os cursos por nível.'],
+                ['label' => 'Categorias', 'count' => $categorias, 'route' => 'admin.categorias.index', 'icon' => 'fa-tags', 'desc' => 'Categorias de documentos ou cursos.'],
+                ['label' => 'Comprovantes', 'count' => $comprovantes, 'route' => 'admin.comprovantes.index', 'icon' => 'fa-file-invoice', 'desc' => 'Arquivos de comprovação.'],
+                ['label' => 'Declarações', 'count' => $declaracoes, 'route' => 'admin.declaracoes.index', 'icon' => 'fa-file-signature', 'desc' => 'Documentos emitidos para os alunos.'],
+                ['label' => 'Documentos', 'count' => $documentos, 'route' => 'admin.documentos.index', 'icon' => 'fa-folder-open', 'desc' => 'Gerencie os documentos anexos.'],
             ];
         @endphp
 

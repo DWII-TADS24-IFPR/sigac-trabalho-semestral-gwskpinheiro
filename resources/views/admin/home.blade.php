@@ -63,14 +63,14 @@
     <div class="row row-cols-1 row-cols-md-3 g-4">
         @php
             $cards = [
-                ['label' => 'Alunos', 'route' => 'alunos.index', 'icon' => 'fa-user-graduate', 'desc' => 'Gerencie os alunos matriculados.'],
-                ['label' => 'Turmas', 'route' => 'turmas.index', 'icon' => 'fa-users', 'desc' => 'Visualize e organize as turmas.'],
-                ['label' => 'Cursos', 'route' => 'cursos.index', 'icon' => 'fa-book-open', 'desc' => 'Cadastre cursos e conteúdos.'],
-                ['label' => 'Níveis', 'route' => 'niveis.index', 'icon' => 'fa-layer-group', 'desc' => 'Classifique os cursos.'],
-                ['label' => 'Categorias', 'route' => 'categorias.index', 'icon' => 'fa-tags', 'desc' => 'Documentos ou cursos.'],
-                ['label' => 'Comprovantes', 'route' => 'comprovantes.index', 'icon' => 'fa-file-alt', 'desc' => 'Arquivos comprobatórios.'],
-                ['label' => 'Declarações', 'route' => 'declaracoes.index', 'icon' => 'fa-file-signature', 'desc' => 'Documentos para alunos.'],
-                ['label' => 'Documentos', 'route' => 'documentos.index', 'icon' => 'fa-folder-open', 'desc' => 'Gerencie os anexos.'],
+                ['label' => 'Alunos', 'route' => 'admin.alunos.index', 'icon' => 'fa-user-graduate', 'desc' => 'Gerencie os alunos matriculados.'],
+                ['label' => 'Turmas', 'route' => 'admin.turmas.index', 'icon' => 'fa-users', 'desc' => 'Visualize e organize as turmas.'],
+                ['label' => 'Cursos', 'route' => 'admin.cursos.index', 'icon' => 'fa-book-open', 'desc' => 'Cadastre cursos e conteúdos.'],
+                ['label' => 'Níveis', 'route' => 'admin.niveis.index', 'icon' => 'fa-layer-group', 'desc' => 'Classifique os cursos.'],
+                ['label' => 'Categorias', 'route' => 'admin.categorias.index', 'icon' => 'fa-tags', 'desc' => 'Documentos ou cursos.'],
+                ['label' => 'Comprovantes', 'route' => 'admin.comprovantes.index', 'icon' => 'fa-file-alt', 'desc' => 'Arquivos comprobatórios.'],
+                ['label' => 'Declarações', 'route' => 'admin.declaracoes.index', 'icon' => 'fa-file-signature', 'desc' => 'Documentos para alunos.'],
+                ['label' => 'Documentos', 'route' => 'admin.documentos.index', 'icon' => 'fa-folder-open', 'desc' => 'Gerencie os anexos.'],
             ];
         @endphp
 
