@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Detalhes')
+@section('title', 'Detalhes da Declaração')
 
 @section('content')
     <h1>Detalhes da Declaração</h1>
@@ -10,7 +10,7 @@
         <li class="list-group-item"><strong>Aluno:</strong> {{ $declaracao->aluno->nome ?? '-' }}</li>
         <li class="list-group-item"><strong>Descrição:</strong> {{ $declaracao->descricao }}</li>
         <li class="list-group-item">
-            <strong>Arquivo:</strong> 
+            <strong>Arquivo:</strong>
             @if($declaracao->arquivo)
                 <a href="{{ Storage::url($declaracao->arquivo) }}" target="_blank">Download</a>
             @else
@@ -19,5 +19,5 @@
         </li>
     </ul>
 
-    <a href="{{ route('declaracoes.index') }}" class="btn btn-secondary mt-3">Voltar</a>
+    <a href="{{ route('admin.declaracoes.index') }}" class="btn btn-secondary mt-3">Voltar</a>
 @endsection

@@ -14,7 +14,7 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <table class="table table-hover">
+    <table class="table table-bordered table-hover">
         <thead class="table-light">
             <tr>
                 <th>ID</th>
@@ -29,7 +29,7 @@
                     <td>{{ $comprovante->id }}</td>
                     <td>{{ $comprovante->descricao }}</td>
                     <td>
-                        <span class="badge bg-{{ $comprovante->status == 'aprovado' ? 'success' : ($comprovante->status == 'reprovado' ? 'danger' : 'secondary') }}">
+                        <span class="badge bg-{{ $comprovante->status === 'aprovado' ? 'success' : ($comprovante->status === 'reprovado' ? 'danger' : 'secondary') }}">
                             {{ ucfirst($comprovante->status) }}
                         </span>
                     </td>
@@ -37,12 +37,14 @@
                         @if($comprovante->arquivo)
                             <a href="{{ Storage::url($comprovante->arquivo) }}" target="_blank" class="btn btn-sm btn-outline-primary">Ver</a>
                         @else
-                            -
+                            <span class="text-muted">Não enviado</span>
                         @endif
                     </td>
                 </tr>
             @empty
-                <tr><td colspan="4" class="text-center text-muted">Nenhum comprovante enviado.</td></tr>
+                <tr>
+                    <td colspan="4" class="text-center text-muted">Nenhum comprovante enviado.</td>
+                </tr>
             @endforelse
         </tbody>
     </table>

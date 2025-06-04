@@ -4,7 +4,8 @@
 
 @section('content')
     <h1>Nova Turma</h1>
-    <form action="{{ route('turmas.store') }}" method="POST">
+
+    <form action="{{ route('admin.turmas.store') }}" method="POST">
         @csrf
 
         <div class="mb-3">
@@ -54,5 +55,6 @@
         </div>
 
         <button type="submit" class="btn btn-success">Salvar</button>
+        <a href="{{ route('admin.turmas.index') }}" class="btn btn-outline-secondary ms-2">Cancelar</a>
     </form>
 @endsection

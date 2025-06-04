@@ -4,7 +4,7 @@
 
 @section('content')
     <h1>Novo Aluno</h1>
-    <form action="{{ route('alunos.store') }}" method="POST">
+    <form action="{{ route('admin.alunos.store') }}" method="POST">
         @csrf
 
         <div class="mb-3">

@@ -4,7 +4,7 @@
 
 @section('content')
     <h1>Nova Categoria</h1>
-    <form action="{{ route('categorias.store') }}" method="POST">
+    <form action="{{ route('admin.categorias.store') }}" method="POST">
         @csrf
         <div class="mb-3">
             <label for="nome" class="form-label">Nome</label>

@@ -13,6 +13,6 @@
         <li class="list-group-item"><strong>CPF:</strong> {{ $aluno->cpf }}</li>
     </ul>
 
-    <a href="{{ route('alunos.index') }}" class="btn btn-secondary">Voltar</a>
-    <a href="{{ route('alunos.edit', $aluno) }}" class="btn btn-warning">Editar</a>
+    <a href="{{ route('admin.alunos.index') }}" class="btn btn-secondary">Voltar</a>
+    <a href="{{ route('admin.alunos.edit', $aluno) }}" class="btn btn-warning">Editar</a>
 @endsection

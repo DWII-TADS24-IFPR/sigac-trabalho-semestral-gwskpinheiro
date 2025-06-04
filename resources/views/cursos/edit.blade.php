@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Editar')
+@section('title', 'Editar Curso')
 
 @section('content')
-    <h1>Editar Registro</h1>
-    <form action="{{ route('cursos.update', $item) }}" method="POST">
+    <h1>Editar Curso</h1>
+    <form action="{{ route('admin.cursos.update', $item) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="mb-3">

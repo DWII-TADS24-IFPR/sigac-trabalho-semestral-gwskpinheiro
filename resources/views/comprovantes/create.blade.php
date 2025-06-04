@@ -6,7 +6,7 @@
 <div class="container">
     <h1 class="mb-4">Novo Comprovante</h1>
 
-    <form action="{{ route('comprovantes.store') }}" method="POST" enctype="multipart/form-data" class="card shadow p-4">
+    <form action="{{ route('admin.comprovantes.store') }}" method="POST" enctype="multipart/form-data" class="card shadow p-4">
         @csrf
 
         <div class="mb-3">
@@ -48,7 +48,7 @@
         </div>
 
         <div class="d-flex justify-content-between">
-            <a href="{{ route('comprovantes.index') }}" class="btn btn-outline-secondary">Cancelar</a>
+            <a href="{{ route('admin.comprovantes.index') }}" class="btn btn-outline-secondary">Cancelar</a>
             <button type="submit" class="btn btn-success">
                 <i class="fas fa-check-circle me-1"></i> Salvar Comprovante
             </button>

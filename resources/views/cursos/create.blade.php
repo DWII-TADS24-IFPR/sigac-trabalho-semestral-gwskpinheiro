@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Novo')
+@section('title', 'Novo Curso')
 
 @section('content')
-    <h1>Novo Registro</h1>
-    <form action="{{ route('cursos.store') }}" method="POST">
+    <h1>Novo Curso</h1>
+    <form action="{{ route('admin.cursos.store') }}" method="POST">
         @csrf
         <div class="mb-3">
             <label for="nome" class="form-label">Nome</label>

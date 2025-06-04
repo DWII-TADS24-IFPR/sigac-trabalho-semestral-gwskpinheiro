@@ -4,7 +4,7 @@
 
 @section('content')
     <h1>Novo Documento</h1>
-    <form action="{{ route('documentos.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.documentos.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3">
@@ -34,7 +34,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="nome" class="form-label">Nome</label>
+            <label for="nome" class="form-label">Nome do Documento</label>
             <input type="text" name="nome" id="nome" class="form-control" value="{{ old('nome') }}">
             @error('nome')
                 <div class="text-danger">{{ $message }}</div>
@@ -42,7 +42,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="arquivo" class="form-label">Arquivo</label>
+            <label for="arquivo" class="form-label">Arquivo (PDF, imagem, etc.)</label>
             <input type="file" name="arquivo" id="arquivo" class="form-control">
             @error('arquivo')
                 <div class="text-danger">{{ $message }}</div>

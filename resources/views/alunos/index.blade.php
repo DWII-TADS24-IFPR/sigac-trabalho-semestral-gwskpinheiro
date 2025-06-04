@@ -5,7 +5,7 @@
 @section('content')
     <h1>Lista de Alunos</h1>
 
-    <a href="{{ route('alunos.create') }}" class="btn btn-primary mb-3">Novo</a>
+    <a href="{{ route('admin.alunos.create') }}" class="btn btn-primary mb-3">Novo</a>
 
     <table class="table table-bordered">
         <thead>
@@ -21,9 +21,9 @@
                 <td>{{ $item->id }}</td>
                 <td>{{ $item->nome ?? '-' }}</td>
                 <td>
-                    <a href="{{ route('alunos.show', $item) }}" class="btn btn-info btn-sm">Ver</a>
-                    <a href="{{ route('alunos.edit', $item) }}" class="btn btn-warning btn-sm">Editar</a>
-                    <form action="{{ route('alunos.destroy', $item) }}" method="POST" class="d-inline">
+                    <a href="{{ route('admin.alunos.show', $item) }}" class="btn btn-info btn-sm">Ver</a>
+                    <a href="{{ route('admin.alunos.edit', $item) }}" class="btn btn-warning btn-sm">Editar</a>
+                    <form action="{{ route('admin.alunos.destroy', $item) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza?')">Excluir</button>

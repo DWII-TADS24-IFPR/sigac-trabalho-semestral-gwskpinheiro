@@ -4,7 +4,7 @@
 
 @section('content')
     <h1>Editar Documento</h1>
-    <form action="{{ route('documentos.update', $documento) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.documentos.update', $documento) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -35,7 +35,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="nome" class="form-label">Nome</label>
+            <label for="nome" class="form-label">Nome do Documento</label>
             <input type="text" name="nome" id="nome" class="form-control" value="{{ old('nome', $documento->nome) }}">
             @error('nome')
                 <div class="text-danger">{{ $message }}</div>
@@ -46,7 +46,9 @@
             <label for="arquivo" class="form-label">Arquivo</label>
             <input type="file" name="arquivo" id="arquivo" class="form-control">
             @if ($documento->arquivo)
-                <small>Atual: <a href="{{ Storage::url($documento->arquivo) }}" target="_blank">Ver Arquivo</a></small>
+                <small class="d-block mt-2">
+                    Atual: <a href="{{ Storage::url($documento->arquivo) }}" target="_blank">Ver Arquivo</a>
+                </small>
             @endif
             @error('arquivo')
                 <div class="text-danger">{{ $message }}</div>

@@ -6,7 +6,7 @@
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="mb-0">Comprovantes</h1>
-        <a href="{{ route('comprovantes.create') }}" class="btn btn-primary">
+        <a href="{{ route('admin.comprovantes.create') }}" class="btn btn-primary">
             <i class="fas fa-plus"></i> Novo Comprovante
         </a>
     </div>
@@ -41,13 +41,13 @@
                             <span class="badge bg-{{ $badgeClass }} text-capitalize">{{ $comprovante->status ?? 'pendente' }}</span>
                         </td>
                         <td class="text-end">
-                            <a href="{{ route('comprovantes.show', $comprovante) }}" class="btn btn-sm btn-outline-info">
+                            <a href="{{ route('admin.comprovantes.show', $comprovante) }}" class="btn btn-sm btn-outline-info">
                                 <i class="fas fa-eye"></i>
                             </a>
-                            <a href="{{ route('comprovantes.edit', $comprovante) }}" class="btn btn-sm btn-outline-warning">
+                            <a href="{{ route('admin.comprovantes.edit', $comprovante) }}" class="btn btn-sm btn-outline-warning">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <form action="{{ route('comprovantes.destroy', $comprovante) }}" method="POST" class="d-inline">
+                            <form action="{{ route('admin.comprovantes.destroy', $comprovante) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Tem certeza?')">
@@ -56,11 +56,11 @@
                             </form>
 
                             @if(auth()->user()->is_admin && $comprovante->status === 'pendente')
-                                <form action="{{ route('comprovantes.aprovar', $comprovante->id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('admin.comprovantes.aprovar', $comprovante->id) }}" method="POST" class="d-inline">
                                     @csrf @method('PATCH')
                                     <button class="btn btn-sm btn-success">Aprovar</button>
                                 </form>
-                                <form action="{{ route('comprovantes.reprovar', $comprovante->id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('admin.comprovantes.reprovar', $comprovante->id) }}" method="POST" class="d-inline">
                                     @csrf @method('PATCH')
                                     <button class="btn btn-sm btn-danger">Reprovar</button>
                                 </form>

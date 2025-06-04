@@ -24,6 +24,6 @@
         </li>
     </ul>
 
-    <a href="{{ route('comprovantes.index') }}" class="btn btn-secondary">Voltar</a>
+    <a href="{{ route('admin.comprovantes.index') }}" class="btn btn-secondary">Voltar</a>
 </div>
 @endsection

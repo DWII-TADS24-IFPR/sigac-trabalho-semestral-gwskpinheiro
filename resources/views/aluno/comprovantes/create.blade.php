@@ -26,7 +26,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="arquivo" class="form-label">Arquivo</label>
+            <label for="arquivo" class="form-label">Arquivo (PDF ou Imagem)</label>
             <input type="file" name="arquivo" id="arquivo" class="form-control" required>
             @error('arquivo')
                 <div class="text-danger small">{{ $message }}</div>
@@ -34,7 +34,7 @@
         </div>
 
         <button type="submit" class="btn btn-success">Enviar</button>
-        <a href="{{ route('aluno.comprovantes.index') }}" class="btn btn-secondary">Cancelar</a>
+        <a href="{{ route('aluno.comprovantes.index') }}" class="btn btn-outline-secondary ms-2">Cancelar</a>
     </form>
 </div>
 @endsection

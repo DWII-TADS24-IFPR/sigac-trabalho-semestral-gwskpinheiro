@@ -4,7 +4,7 @@
 
 @section('content')
     <h1>Editar Categoria</h1>
-    <form action="{{ route('categorias.update', $categoria) }}" method="POST">
+    <form action="{{ route('admin.categorias.update', $categoria) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="mb-3">

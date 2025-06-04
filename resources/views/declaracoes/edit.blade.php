@@ -5,7 +5,7 @@
 @section('content')
     <h1>Editar Declaração</h1>
 
-    <form action="{{ route('declaracoes.update', $declaracao) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.declaracoes.update', $declaracao) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -34,7 +34,9 @@
             <label for="arquivo" class="form-label">Arquivo (PDF)</label>
             <input type="file" name="arquivo" id="arquivo" class="form-control">
             @if ($declaracao->arquivo)
-                <small>Arquivo atual: <a href="{{ Storage::url($declaracao->arquivo) }}" target="_blank">Ver</a></small>
+                <small class="d-block mt-2">
+                    Arquivo atual: <a href="{{ Storage::url($declaracao->arquivo) }}" target="_blank">Visualizar</a>
+                </small>
             @endif
             @error('arquivo')
                 <div class="text-danger">{{ $message }}</div>

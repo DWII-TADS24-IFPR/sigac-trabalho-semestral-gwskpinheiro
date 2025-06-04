@@ -6,7 +6,7 @@
 <div class="container">
     <h1 class="mb-4">Editar Comprovante</h1>
 
-    <form action="{{ route('comprovantes.update', $comprovante) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.comprovantes.update', $comprovante) }}" method="POST" enctype="multipart/form-data">
         @csrf @method('PUT')
 
         <div class="mb-3">
@@ -40,7 +40,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Atualizar</button>
-        <a href="{{ route('comprovantes.index') }}" class="btn btn-secondary ms-2">Cancelar</a>
+        <a href="{{ route('admin.comprovantes.index') }}" class="btn btn-secondary ms-2">Cancelar</a>
     </form>
 </div>
 @endsection
